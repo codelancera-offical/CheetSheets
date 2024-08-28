@@ -1,0 +1,123 @@
+# Pathlib Module
+    from pathlib import Path
+## Path operation
+
+    1. Joining Path
+        ```
+        print(Path('user').joinpath('bin').joinpath('spam'))
+        # equal to
+        print(Path('usr') / 'bin' / 'spam')
+        ```
+
+    2. Get Special Location
+        ```
+        home = Path.home()  # Get the home directory 
+        cwd = Path.cwd()    # Get current working directory
+        ```
+   
+    3. Extract an absolute path from relative paths
+        ```
+        print(Path('..').resolve())
+        ```
+    
+    4. Handling Relative paths
+        ```
+        print(Path('/etc/passwd').relative_to('/'))
+
+## File and Directory Property Operation
+
+    1. Checking if a file/dir exists
+        ```
+        Path('setup.py').exist()
+        Path('/dirName')
+        ```
+
+    2. Checking if a path is a file
+        ```
+        Path('/path').is_file()
+        ```
+
+    3. Checking if a path is a directory
+        ```
+        Path('/dirpath').is_dir()
+        ```
+
+    4. Getting a file's size in bytes
+        ```
+        stat = Path('/bin/python3.10').stat()
+        stat.st_size
+        ```
+
+    5. Listing directories (ls)
+        ```
+        for dir in Path('\dir_path').iterdir():
+            print(dir)
+
+    6. Getting Directory file sizes
+        ```
+        total_size = 0
+        for sub_path in Path('/dir_path').iterdir():
+            total_size += sub_path.stat().st_size
+        print(total_size)
+        ```
+
+    7. Match the files(Filter and deal)
+        ```
+        # for all the .txt file in one directory
+        ```
+        for text_file in dir_path.glob('*.txt')
+            print(text_file)
+
+        # search all subdirectories
+        for text_file in dir_path.rglob('*.txt')
+            print(text_file)
+        ```
+
+    8. Get Files Property
+        ```
+        file_path.name  # full file name
+        file_path.stem  # no extension name
+        file_path.suffix    # file's extension name
+        file_path.parent    # ..
+        file_path.resolve() # file full path
+ 
+
+
+## File and Directory create/delete Operations
+
+    1. Create Empty File
+        ```
+        file_path = Path('new_file.txt')
+        file_path.touch()
+        ```
+
+
+    2. Create a File and Write Content
+        ```
+        file_path = Path('new_file_with_content.txt')
+        file_path.write_text('Hello, world!')
+        ```
+
+    3. Delete File
+        ```
+        file_path = Path('filepath')
+        file_path.unlink()
+        ```
+
+    4. Create Directory
+        ```
+        dir_path.mkdir(exist_ok=True)   # don't throw erroe if it has exist
+        ```
+
+    5. Delete Directory
+        ```
+        dir_path = Path('dirpath')
+        dir_path.rmdir() # if the dir is empty
+        
+        import shutil
+        if dir_path.exist() and dir_path.is_dir():
+            shutil.rmtree(dir_path)
+        ```
+
+
+

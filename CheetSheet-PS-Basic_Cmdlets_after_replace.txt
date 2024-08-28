@@ -1,0 +1,89 @@
+# Powershell CheetSheet
+
+## 1. 路径操作
+
+1. `Get-ChildItem` (`ls`, `gci`)
+   - `-Path`: 指定路径
+   - `-Recurse`: 递归列出子目录中的内容
+   - `-Filter`: 使用筛选器进行过滤
+   - `-Recurse`: 递归搜索子目录中的文件
+   - `-Name`: 仅显示名称，不显示完整路径
+   - `-Directory`: 仅列出目录
+   - `-File`: 仅列出文件
+
+   1.1 搜索到的文件属性
+      - .FullName 文件的绝对路径名
+
+2. `Set-Location` (`cd`, `sl`)
+   - `-Path`: 指定要更改到的路径
+
+3. `Get-Location` (`pwd`)
+   - 无常见参数
+
+4. `Join-Path`
+   - `-Path`: 指定要拼接的路径
+   - `-ChildPath`：指定要拼接的子路径
+
+5. $FileType = (Get-Item $FilePath).Extension.TrimStart('.')
+   - `(FileObject).Extension.TrimStart('.')`: 获得文件拓展名，去掉.
+
+
+## 2. 文件操作
+
+1. `Copy-Item` (`cp`)
+   - `-Path`: 源路径
+   - `-Destination`: 目标路径
+   - `-Recurse`: 递归复制目录及其内容
+   - `-Force`: 强制复制（覆盖只读文件）
+
+2. `Move-Item` (`mv`)
+   - `-Path`: 源路径
+   - `-Destination`: 目标路径
+   - `-Force`: 强制移动（覆盖现有文件）
+
+3. `Remove-Item` (`rm`)
+   - `-Path`: 要删除的路径
+   - `-Recurse`: 递归删除目录及其内容
+   - `-Force`: 强制删除（忽略文件属性）
+
+4. `New-Item` (`mkdir`, `ni`)
+   - `-Path`: 要创建的新文件或目录路径
+   - `-ItemType`: 指定项的类型（`File`, `Directory` 等）
+       - SymbolicLink -Path -Target
+   - `-Force`: 强制创建（即使目标已存在）
+
+## 3. I/O操作
+
+1. `Get-Content` (`gc`)
+   - `-Path`: 要读取的文件路径
+   - `-Encoding`: 文件编码（例如 `UTF8`, `ASCII`）
+   - `-Raw`: 以单个字符串读取内容（而不是按行读取）
+
+2. `Write-Output` (`echo`)
+   - 输出的东西还可以再送进管道符
+   - `-InputObject`: 要输出的对象
+   - `-NoEnumerate`: 禁止自动枚举输入对象
+
+3. `Write-Host`
+    - 不可以再进管道符了
+    - 每次自动换行
+    - 直接终端显示
+3. `Select-String` (`grep`)
+    - `-Path`: 要搜索的文件路径
+    - `-Pattern`: 要搜索的文本模式
+    - `-CaseSensitive`: 匹配时区分大小写
+    - `-NotMatch`: 查找不匹配模式的行
+    - `-Recurse`: 递归搜索子目录中的文件
+
+4. `Get-Help` (`help`)
+    - `-Name`: 获取指定命令的帮助信息
+    - `-Full`: 显示完整的帮助信息
+    - `-Detailed`: 显示详细的帮助信息
+    - `-Examples`: 显示示例信息
+
+12. `Stop-Process` (`kill`)
+    - `-Name`: 进程名称
+    - `-Id`: 进程 ID
+    - `-Force`: 强制终止进程
+
+

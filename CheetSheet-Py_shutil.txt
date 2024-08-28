@@ -1,0 +1,50 @@
+`shutil` 是 Python 的一个标准库模块，用于执行高级的文件和文件夹操作。它提供了许多对文件和文件夹的处理功能，超出了 `os` 模块的基本功能。`shutil` 包含了用于文件和目录操作的多个实用函数，例如复制、移动和删除等。
+
+### 常见功能
+
+1. **删除文件和文件夹**
+   - `shutil.rmtree(path)`: 递归删除一个目录及其所有内容。
+   - `shutil.remove(path)`: 删除指定路径的文件（通常用 `os.remove()`，`shutil` 中没有该方法）。
+
+2. **复制文件和目录**
+   - `shutil.copy(src, dst)`: 复制文件到指定路径。只复制文件内容，不复制文件的元数据（如修改时间）。
+   - `shutil.copy2(src, dst)`: 复制文件到指定路径，连同文件的元数据。
+   - `shutil.copytree(src, dst)`: 递归复制目录及其所有内容到指定路径。
+
+3. **移动文件和目录**
+   - `shutil.move(src, dst)`: 移动文件或目录到指定路径。如果目标路径存在，会将源路径的文件或目录移动到目标路径。
+
+4. **创建归档文件**
+   - `shutil.make_archive(base_name, format, root_dir)`: 创建归档文件（如 `.zip`、`.tar`），其中 `base_name` 是归档文件的基本名称，`format` 是归档格式，`root_dir` 是要归档的目录。
+
+5. **解压缩归档文件**
+   - `shutil.unpack_archive(filename, extract_dir)`: 解压缩归档文件到指定目录。
+
+### 示例代码
+
+```python
+import shutil
+from pathlib import Path
+
+# 删除非空文件夹
+dir_path = Path('/path/to/directory')
+if dir_path.exists() and dir_path.is_dir():
+    shutil.rmtree(dir_path)
+
+# 复制文件
+shutil.copy('source_file.txt', 'destination_file.txt')
+
+# 复制目录
+shutil.copytree('source_directory', 'destination_directory')
+
+# 移动文件
+shutil.move('source_file.txt', 'destination_directory/source_file.txt')
+
+# 创建归档文件
+shutil.make_archive('/path/to/archive', 'zip', '/path/to/directory')
+
+# 解压缩归档文件
+shutil.unpack_archive('/path/to/archive.zip', '/path/to/extract_directory')
+```
+
+`shutil` 模块为文件和目录的管理提供了强大而灵活的工具，使得在 Python 中进行这些操作变得简单而高效。
